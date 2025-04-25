@@ -83,28 +83,4 @@ async def session_release(interaction: discord.Interaction, link: str, peacetime
         title="SFRT | Session Release",
         description=("The session host has now released the link to everyone. Click the button below to join this session!\n\n"
                      f"**Session Host:** {interaction.user.mention}\n"
-                     f"**Peacetime Status:** {peacetime_status}\n"
-                     f"**Failroleplay Speeds:** {failroleplay_speeds}\n"
-                     f"**Drifting Status:** {drifting}"),
-        color=discord.Color.from_rgb(255, 255, 255)
-    )
-    embed.set_image(url="attachment://SFRT.Release.jpg")
-    view = ui.View()
-    view.add_item(RoleRestrictedButton("Join Session", link, [CIVILIAN_ROLE_ID]))
-    file = discord.File("SFRT.Release.jpg", filename="SFRT.Release.jpg")
-    await interaction.channel.send(f"<@&{SESSION_PING_ROLE_ID}> @here", embed=embed, view=view, file=file)
-    await interaction.response.send_message("Session released to everyone.", ephemeral=True)
 
-@bot.tree.command(name="conclusion", description="Conclude a roleplay session", guild=discord.Object(id=GUILD_ID))
-@app_commands.describe(duration="Total Duration of the session")
-async def conclusion(interaction: discord.Interaction, duration: str):
-    embed = discord.Embed(
-        title="SFRT | Roleplay Concluded",
-        description=(f"{interaction.user.mention}'s roleplay session has concluded. Thank you to all who have attended this roleplay.\n"
-                     f"**Total Duration:** {duration}"),
-        color=discord.Color.from_rgb(255, 255, 255)
-    )
-    await interaction.channel.send(embed=embed)
-    await interaction.response.send_message("Session conclusion posted.", ephemeral=True)
-
-bot.run("MTM2NTE1Mjc4MjIwNTcxODYwOA.GtuRO5.cB1oblHvEu_KzpHDKp51sizDuujsXwuQTv6k8Y")
